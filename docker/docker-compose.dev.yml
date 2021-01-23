@@ -1,0 +1,19 @@
+version: '3.6'
+
+services:
+
+  app:
+    build:
+      context: ../
+      dockerfile: docker/app.dockerfile
+    working_dir: /home/node/app
+    restart: unless-stopped
+    ports:
+      - ${SERVER_PORT}:3000
+    volumes:
+      - ../:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    command: npm run start:dev
+
+volumes:
+  node_modules:
